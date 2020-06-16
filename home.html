@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4"> Upload Your Files </h1>
+    <br>
+    <br>
+
+    <div class="">
+
+      <form class="" action="{{ url_for('index') }}" method="POST", enctype="multipart/form-data">
+
+        {{  form.hidden_tag()  }}
+
+        {{  form.file()  }}
+
+        {{  form.submit(  class="btn btn-primary"  )  }}
+
+      </form>
+
+    </div>
+
+
+
+    <br>
+
+    <br>
+{% for file in files %}
+    <table class="table table-hover table-dark">
+
+  <tr>
+    <th>Name</th>
+    <th>Size</th>
+    <th>Date</th>
+    <th>Hash</th>
+
+  </tr>
+
+  <tr>
+
+
+    <th>{{file.name}}
+        </th>
+    <th>{{file.size}}
+        </th>
+    <th>{{file.timestamp}}
+        </th>
+    <th>{{file.hash}}
+        </th>
+      </tr>
+    </table>
+    <a href="{{ url_for('download',id = file.id) }}">Download</a>
+    <a href="/delete">Delete Record</a><br><br>
+
+
+    <br>
+    {% endfor %}
+
+
+
+
+</div>
+
+
+
+<style type="text/css">
+
+  .container{
+
+    text-align:center;
+
+    font-align:center;
+
+    padding:10px;}
+
+</style>
+
+
+
+{% endblock %}
